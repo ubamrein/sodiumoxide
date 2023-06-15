@@ -184,7 +184,13 @@ fn make_libsodium(target: &str, source_dir: &Path, install_dir: &Path) -> PathBu
                 cflags += " -arch arm64";
                 cflags += &format!(" -isysroot {}", sdk_dir_ios);
                 cflags += &format!(" -mios-version-min={}", ios_version_min);
-                cflags += " -fembed-bitcode";
+               
+                host_arg = "--host=arm-apple-darwin10".to_string();
+            }
+            "aarch64-apple-ios-sim" => {
+                 cflags += " -arch arm64";
+                cflags += &format!(" -isysroot {}", sdk_dir_simulator);
+                cflags += &format!(" -mios-simulator-version-min={}", ios_simulator_version_min);
                 host_arg = "--host=arm-apple-darwin10".to_string();
             }
             "armv7-apple-ios" => {
